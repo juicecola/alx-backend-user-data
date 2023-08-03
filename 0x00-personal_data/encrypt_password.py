@@ -1,44 +1,34 @@
 #!/usr/bin/env python3
 """
-encrypt_password.py - Module for hashing and validating passwords using bcrypt.
+Encrypting passwords using bcrypt library.
 """
 
 import bcrypt
 
 
-def hash_password(password):
+def hash_password(password: str) -> bytes:
     """
-    Hash and salt a password using bcrypt.
+    Hash the password using bcrypt.
 
     Args:
-        password (str): The password to be hashed.
+        password: The plaintext password to be hashed.
 
     Returns:
         bytes: The hashed and salted password as bytes.
     """
-    salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
-    return hashed_password
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 
-def is_valid(hashed_password, password):
+def is_valid(hashed_password: bytes, password: str) -> bool:
     """
-    Validate that the provided password matches the hashed password.
+    Check if the provided password matches the hashed password.
 
     Args:
-        hashed_password (bytes): The hashed and salted password as bytes.
-        password (str): The password to be validated.
+        hashed_password: The hashed password as bytes.
+        password: The plaintext password to be checked.
 
     Returns:
-        bool: True if the password matches the hashed password, False otherwise.
+        bool: True if the provided password matches the hashed password, False otherwise.
     """
     return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
-
-
-if __name__ == "__main__":
-    # Test the functions
-    password = "MyAmazingPassw0rd"
-    encrypted_password = hash_password(password)
-    print(f"Hashed Password: {encrypted_password}")
-    print(f"Password Validation: {is_valid(encrypted_password, password)}")
 
