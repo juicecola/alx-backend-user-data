@@ -14,6 +14,13 @@ def status() -> str:
     return jsonify({"status": "OK"})
 
 
+@app_views.route('/unauthorized', methods=['GET'])
+def unathorized_endpoint():
+    """GET /api/v!/stats
+    """
+    abort(401)
+
+
 @app_views.route('/stats/', strict_slashes=False)
 def stats() -> str:
     """ GET /api/v1/stats
