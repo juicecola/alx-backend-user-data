@@ -18,7 +18,14 @@ def status() -> str:
 def unathorized_endpoint():
     """GET /api/v!/stats
     """
-    abort(401)
+    abort(401, description='Unauthorized')
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden() -> str:
+    """error handler
+    """
+    abort (403, description='Forbidden')
 
 
 @app_views.route('/stats/', strict_slashes=False)
