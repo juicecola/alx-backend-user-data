@@ -11,6 +11,7 @@ from uuid import uuid4
 
 from typing import Union
 
+
 def _hash_password(password: str) -> str:
     """Hashes a password using bcrypt.
 
@@ -22,6 +23,7 @@ def _hash_password(password: str) -> str:
     """
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
+
 def _generate_uuid() -> str:
     """Generates a UUID4 string.
 
@@ -30,6 +32,7 @@ def _generate_uuid() -> str:
     """
     id = uuid4()
     return str(id)
+
 
 class Auth:
     """Authentication class for user authentication.
@@ -79,4 +82,3 @@ class Auth:
         return bcrypt.checkpw(password.encode('utf-8'), user.hashed_password)
 
     # ... (Other methods follow with similar detailed comments)
-
