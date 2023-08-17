@@ -10,12 +10,14 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from user import Base, User
 
+
 class DB:
     """A class for interacting with the user database.
     """
 
     def __init__(self) -> None:
-        """Initialize a new DB instance and create database tables if they don't exist.
+        """Initialize a new DB instance and create databasei
+        tables if they don't exist.
         """
         self._engine = create_engine("sqlite:///a.db", echo=False)
         Base.metadata.create_all(self._engine)
@@ -74,7 +76,8 @@ class DB:
             **kwargs: Updated user attributes and values.
 
         Raises:
-            ValueError: When an attribute provided in kwargs doesn't exist in the User class.
+            ValueError: When an attribute provided in kwargs
+            doesn't exist in the User class.
         """
         user = self.find_user_by(id=user_id)
         for key, value in kwargs.items():
@@ -83,4 +86,3 @@ class DB:
             setattr(user, key, value)
 
         self._session.commit()
-
